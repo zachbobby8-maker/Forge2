@@ -1,0 +1,134 @@
+:root {
+  color-scheme: dark;
+  font-family: Impact, "Arial Black", sans-serif; /* Gritty, heavy font for headers */
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #0a0a0a; /* Deep black */
+  color: #e5e5e5;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-heavy {
+  font-family: Impact, "Arial Black", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+button {
+  font: inherit;
+}
+
+/* Custom Scrollbar for chat */
+.chat-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: #111;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: #500;
+  border-radius: 4px;
+}
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: #800;
+}
+
+/* Radar Animation */
+.radar-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 2px solid #500;
+  background: radial-gradient(circle, #1a0505 0%, #000 70%);
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 0 40px rgba(139, 0, 0, 0.2) inset;
+}
+
+.radar-grid {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  background-image: 
+    linear-gradient(rgba(255, 0, 0, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.2) 1px, transparent 1px);
+  background-size: 20% 20%;
+  background-position: center center;
+}
+
+.radar-grid::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%; height: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.radar-sweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  background: conic-gradient(from 0deg, transparent 70%, rgba(255, 0, 0, 0.8) 100%);
+  transform-origin: 0% 0%;
+  animation: sweep 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-blip {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #f00;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px #f00, 0 0 20px #f00;
+  cursor: pointer;
+  transition: transform 0.2s;
+  animation: pulse 2s infinite;
+}
+
+.radar-blip:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  z-index: 10;
+}
+
+.radar-blip.trainer {
+  background-color: #ff3333;
+}
+
+.radar-blip.seeker {
+  background-color: #ffaa00;
+  box-shadow: 0 0 10px #ffaa00, 0 0 20px #ffaa00;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* Utility to hide/show views smoothly */
+.view {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.view.active {
+  display: flex;
+  opacity: 1;
+}
